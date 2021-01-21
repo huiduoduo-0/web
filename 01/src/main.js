@@ -15,7 +15,7 @@ axios.defaults.withCredentials=true
 Vue.prototype.$axios=axios
 
 
-axios.defaults.baseURL="http://192.168.2.149:8090"
+axios.defaults.baseURL="http://localhost:8090"
 
 // 导入ElementUI
 import elementUI from 'element-ui';

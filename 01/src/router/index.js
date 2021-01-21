@@ -2,12 +2,39 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
+import login from '../views/login.vue'
 import index from '../views/index.vue'
+import register from '../views/register.vue'
+import ForgetThePassword from '../views/ForgetThePassword.vue'
+import verification from '../views/verification.vue'
 const router = new VueRouter({
   mode: 'history',
   //登录
-  routes: [{
-    path: '/',
+  routes: [
+    {
+      path: '/',
+      name: 'login',
+      component: () => import('../views/login.vue'),
+     
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: () => import('../views/register.vue'),
+    },
+    {
+      path: '/ForgetThePassword',
+      name: 'ForgetThePassword',
+      component: () => import('../views/ForgetThePassword.vue'),
+    },
+    {
+      path: '/verification',
+      name: 'verification',
+      component: () => import('../views/verification.vue'),
+    },
+    
+    {
+    path: '/index',
     name: 'Container',
     component: () => import('../views/index.vue'),
     children: [
