@@ -72,8 +72,7 @@
 
         <el-form-item >
           <el-row>
-             <img :src="imgUrl"  alt=""  @click="resetImg">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-             <a>看不清，点击图片更换</a>
+             <img :src="imgUrl"  alt=""  @click="resetImg"><a class="genhuan"><el-button type="text" >看不清，点击更换</el-button></a>
           </el-row>
         </el-form-item>
 
@@ -168,7 +167,7 @@ export default {
               if (response.data.code == 200) {
                 
                vueThis.$router.push({
-                    path: '/Password',
+                    path: '/ForgetThePassword',
                       query: {
                        id: response.data.date.user.id
                  }
@@ -256,6 +255,9 @@ export default {
     }
     .goLogin{
        margin-left: 25%;
+    }
+    .genhuan{
+       margin-left: 25%;   
     }
   }
 }

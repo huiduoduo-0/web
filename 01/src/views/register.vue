@@ -132,8 +132,7 @@
 
         <el-form-item >
           <el-row>
-             <img :src="imgUrl"  alt=""  @click="resetImg">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
-             <a>看不清，点击图片更换</a>
+             <img :src="imgUrl"  alt=""  @click="resetImg"><a class="genhuan"  @click="resetImg"><el-button type="text" >看不清，点击更换</el-button></a>
           </el-row>
         </el-form-item>
 
@@ -316,6 +315,7 @@ export default {
          email : email,
          ConfirmPassword : ConfirmPassword
        };
+       let vueThis = this;
       this.$refs[loginForm].validate((valid) =>{
            if (valid) {
             this.$axios
@@ -326,7 +326,7 @@ export default {
               window.location.href = "/";
             }else{
                alert(response.data.message)
-               this.imgUrl = "http://localhost:8090/code/img?time="+new Date();
+               vueThis.imgUrl = "http://localhost:8090/code/img?time="+new Date();
             }
           })
           .catch(function (error) {
@@ -416,6 +416,9 @@ export default {
     }
     .goLogin{
        margin-left: 25%;
+    }
+    .genhuan{
+       margin-left: 25%;   
     }
   }
 }
