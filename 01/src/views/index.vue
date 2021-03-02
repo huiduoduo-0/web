@@ -5,38 +5,38 @@
       class="el-menu-deom"
       mode="horizontal"
       @select="handleSelect"
-      background-color="#2A94DE"
+      background-color="#293038"
       text-color="#fff"
       active-text-color="#ffd04b"
     >
-      <a href="https://www.hjuji.com/"
+      <!-- <a href="https://www.hjuji.com/"
         ><img
           src="https://www.hjuji.com/img/hjuji-logo-1.145cebc.png"
           class="logo"
-      /></a>
+      /></a> -->
 
-
-        
-      <div class="myinput">
-         <a class="huiduoduo" href="http://192.168.42.207:8080/">惠多多后台管理中心</a>
-        <input type="text" class="put"  v-model="myput"/>
-        <el-row class="buttonone">
-          <router-link to="Mall">
-            <el-button @click="search" icon="el-icon-search" circle>
-            </el-button>
-          </router-link>
-        </el-row>
+      <div class="huiduoduoa">
+        <a class="huiduoduo" href="http://localhost:8080/goods"
+          >惠多多后台管理中心</a
+        >
       </div>
+
+      <input type="text" class="put" v-model="myput" />
+      <el-row class="buttonone">
+        <router-link to="Mall">
+          <el-button @click="search" icon="el-icon-search" circle> </el-button>
+        </router-link>
+      </el-row>
     </el-menu>
     <el-col :span="3">
       <el-menu
-        default-active="2"
+        default-active="3"
         class="el-menu-vertical-demo"
         @open="handleOpen"
         @close="handleClose"
-        background-color="#293038"
-        text-color="#fff"
-        active-text-color="#ffd04b"
+        background-color="#F6F8FC"
+        text-color="#656D92"
+        active-text-color="#2A94DE"
       >
         <el-submenu index="1">
           <template slot="title">
@@ -44,10 +44,9 @@
             <span>个人中心</span>
           </template>
           <el-menu-item-group>
-            <template slot="title"></template>
-            <a href="http://192.168.42.207:8080/Recharge">
-              <el-menu-item  index="2-1">充值中心</el-menu-item>
-            </a>
+            <router-link to="Recharge">
+              <el-menu-item index="2-1">充值中心</el-menu-item>
+            </router-link>
             <router-link to="usercenter">
               <el-menu-item index="2-2">个人详情</el-menu-item>
             </router-link>
@@ -56,10 +55,10 @@
             </router-link>
           </el-menu-item-group>
         </el-submenu>
-<!-- disabled -->
-        <el-submenu index="2" >
-          <template slot="title" >
-            <i class="el-icon-location"></i>
+        <!-- disabled -->
+        <el-submenu index="2">
+          <template slot="title">
+            <i class="el-icon-menu"></i>
             <span>后台管理</span>
           </template>
           <el-menu-item-group>
@@ -108,7 +107,7 @@ export default {
     handleClose(key, keyPath) {
       console.log(key, keyPath);
     },
-     
+
     search() {
       console.log(this.myput);
       // this.$axios.post("", result).then(function (response) {
@@ -128,32 +127,65 @@ export default {
   margin-top: 5px;
   margin-right: 20px;
 }
-.huiduoduo{
+.app{
+  margin: -1px;
+}
+.huiduoduoa {
+  float: left;
+  width: 12.5%;
+  height: 112px;
+  display: inline-block;
+  background-color: #F6F8FC;
+  text-align: center;
+  outline:none;
+}
+.huiduoduo {
   font-size: 25px;
-  margin-left: 1%;
-  color: #000;
+  line-height: 100px;
+  color: #364064;
   font-weight: 700;
 }
 .myinput {
-  height: 10%;
+  height: 100%;
   display: block;
 }
 .put {
   width: 40%;
-  height: 25px;
+  height: 50px;
   margin-left: 16%;
-  margin-bottom: 1%;
-  margin-top: 1%;
-  border-radius: 15px;
+  border-radius: 50px;
+  margin-top: 1.2%;
+  outline:none;
+  font-size: 20px;
+  padding-left: 20px;
 }
+
 .buttonone {
   display: inline-block;
-  margin-left: 15px;
+  float: right;
+  margin-top: 1.5%;
+  position: absolute;
+  right: 31.5%;
 }
 .ranks {
   color: #fff;
 }
 .el-menu-vertical-demo {
   height: 860px;
+  font-size: 15px;
+  font-weight: 700;
+}
+.el-submenu__title {
+  text-align: center;
+}
+.el-menu-item {
+  text-align: center;
+}
+.el-menu-deom el-menu--horizontal el-menu {
+  position: relative;
+}
+
+* {
+  font-family: "微软雅黑";
 }
 </style>

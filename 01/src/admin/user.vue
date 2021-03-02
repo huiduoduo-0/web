@@ -3,14 +3,15 @@
     :data="tableData"
     style="width: 100%"
     :default-sort="{ prop: 'date', order: 'descending' }"
+    class="users"
   >
-    <el-table-column prop="date" label="编号" sortable width="100">
+    <el-table-column prop="date" label="编号" sortable width="150">
     </el-table-column>
-    <el-table-column prop="name" label="用户名" sortable width="100">
+    <el-table-column prop="name" label="用户名" sortable width="150">
     </el-table-column>
-    <el-table-column prop="address" label="地址" :formatter="formatter">
+    <el-table-column prop="address" label="地址" :formatter="formatter"  width="300">
     </el-table-column>
-    <el-table-column prop="volume" label="订单" :formatter="formatter">
+    <el-table-column prop="volume" label="订单" :formatter="formatter"  width="300">
     </el-table-column
     ><el-table-column prop="business" label="权限" :formatter="formatter">
     </el-table-column>
@@ -100,4 +101,10 @@ export default {
 </script>
 
 <style>
+.users{
+  margin-left: 1%;
+}
+.cell{
+  margin-right: 10%;
+}
 </style>

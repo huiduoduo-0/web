@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- [if IE]>
+  <script>window.location.href = "https://support.dmeng.net/upgrade-your-browser.html?referrer"</script>
+  <![endif] -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: transparent url(./images/timg.jpg);
+    }
+
+    .cover {
+      width: 600px;
+      height: 300px;
+      position: fixed;
+      text-align: center;
+      line-height: 300px;
+      color: white;
+      top: 300px;
+      left: 650px;
+      box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .5);
+      border-radius: 5px;
+      font-size: 60px;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    .cover::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 600px;
+      height: 300px;
+      background: transparent url(./images/timg.jpg);
+      background-repeat: no-repeat;
+      background-position: -650px -300px;
+      filter: blur(5px);
+      z-index: -1;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bg">
+    <div class="cover">Hello world</div>
+  </div>
+
+</body>
+<script>
+  var cover = document.getElementsByClassName("cover")[0]
+  cover.onmousedown = function (event) {
+    let rex = event.clientX - cover.offsetLeft;
+    let rey = event.clientY - cover.offsetTop;
+    cover.onmousemove = function (e) {
+      let xX = e.clientX;
+      let yY = e.clientY;
+      cover.style.left = (xX - rex) + "px";
+      cover.style.top = (yY - rey) + "px";
+      document.styleSheets[0].addRule('.cover::before', 'background-position:' + (0 - (xX - rex)) + "px" + " " + (0 - (yY - rey)) + "px");
+    }
+  }
+  cover.onmouseup = function () {
+    cover.onmousemove = null;
+  }
+</script>
+
+</html>

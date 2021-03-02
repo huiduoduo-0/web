@@ -1,8 +1,8 @@
 <template>
   <div class="history">
- <h1>
+ <h2 class="historyname">
      历史订单
- </h1>
+ </h2>
     <el-table
       ref="multipleTable"
       :data="tableData"
@@ -21,6 +21,9 @@
       <el-table-column prop="commodity" label="商品名称" width="150">
       </el-table-column>
       <el-table-column prop="address" label="地址"  width="350">
+      </el-table-column>
+      </el-table-column>
+      <el-table-column prop="details" label="详情"  width="350">
       </el-table-column>
       <el-table-column prop="number" label="数量" show-overflow-tooltip>
       </el-table-column>
@@ -130,7 +133,12 @@ div{
   display: inline-block;
 }
 .history{
-  margin-top: 3%;
+  margin-top: 2%;
   margin-left: 1%;
+  color: #707080;
+}
+.historyname{
+  margin-left: 1%;
+  font-weight: 500;
 }
 </style>

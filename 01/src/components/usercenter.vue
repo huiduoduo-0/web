@@ -20,11 +20,11 @@
       <el-main>
         <el-form
           :label-position="labelPosition"
-          label-width="80px"
+          label-width="70px"
           :model="formLabelAlign"
         >
           <el-form-item label="名称">
-            <el-input v-model="myname"></el-input>
+            <el-input  v-model="myname"></el-input>
           </el-form-item>
           <el-form-item label="地点">
             <el-input v-model="myaddress"></el-input>
@@ -39,7 +39,7 @@
             <el-input v-model="emily"></el-input>
           </el-form-item>
           <el-form-item label="性别">
-            <el-radio v-model="radio" label="1">男</el-radio>
+            <el-radio v-model="radio" style="margin-left: 30px;" label="1">男</el-radio>
             <el-radio v-model="radio" label="2">女</el-radio>
           </el-form-item>
           <el-form-item label="真实姓名">
@@ -47,7 +47,7 @@
           </el-form-item>
         </el-form>
         <el-row>
-          <el-button @click="usercenterbut" class="usercenterbut" type="primary">主要按钮</el-button>
+          <el-button @click="usercenterbut" class="usercenterbut" type="primary">保存</el-button>
         </el-row>
       </el-main>
     </el-container>
@@ -91,12 +91,14 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+
 .w {
   margin-top: 3%;
-  width: 87%;
+  width: 50%;
   height: 120%;
   margin-left: 40%;
+  
 
 }
 .el-aside {
@@ -123,14 +125,38 @@ export default {
   height: 100px;
 }
 .el-input__inner {
+    padding-left: 27px;
   float: left;
-  width: 30%;
+  width: 20%;
+  margin-left: 1.5%;
+  margin-top: 5px;
+  border: 1px solid #f7f7f8;
+
 }
 .el-row{
     height: 10%;
 }
-.usercenterbut{
-    float: left;
-    margin-left: 50px;
+.el-form-item__label{
+  color: #80808E;
+padding: 0 17px 0 0;
+
 }
+
+.usercenterbut{
+  width: 8%;
+    float: left;
+    margin-left: 17%;
+    margin-top: 3%;
+    border-radius: 10px;
+    font-size: 20px;
+    padding: 0.3%;
+    font-weight: 700;
+}
+.el-form-item {
+    margin-bottom: 26px;
+}
+.el-input{
+  width: 60%;
+}
+
 </style>

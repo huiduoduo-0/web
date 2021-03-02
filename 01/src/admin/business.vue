@@ -4,9 +4,9 @@
     style="width: 100%"
     :default-sort="{ prop: 'date', order: 'descending' }"
   >
-    <el-table-column prop="date" label="编号" sortable width="100">
+    <el-table-column prop="date" label="编号" sortable width="150">
     </el-table-column>
-    <el-table-column prop="name" label="商家名" sortable width="100">
+    <el-table-column prop="name" label="商家名" sortable width="150">
     </el-table-column>
     <el-table-column prop="address" label="地址" :formatter="formatter">
     </el-table-column>

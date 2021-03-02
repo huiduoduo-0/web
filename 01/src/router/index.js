@@ -39,7 +39,7 @@ const router = new VueRouter({
     component: () => import('../views/index.vue'),
     children: [
       {
-        path: "/",
+        path: "/goods",
         name: "goods",
         component: () => import('../components/index_goods.vue'),
 
@@ -94,7 +94,6 @@ const router = new VueRouter({
             path: "/page",
             name: "page",
             component: () => import('../admin/page.vue'),
-    
           },
         ]
       }

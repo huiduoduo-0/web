@@ -7,7 +7,7 @@
       ref="multipleTable"
       :data="tableData"
       tooltip-effect="dark"
-      style="width: 93%"
+      style="width: 92.5%"
       @selection-change="handleSelectionChange"
     >
       <el-table-column type="selection" width="55"> </el-table-column>
@@ -132,5 +132,10 @@ div {
 .Mall {
   margin-top: 3%;
   margin-left: 1%;
+}
+.mypack{
+  background-color: #F6F8FC;
+  border: 3px solid #76BAEA;
+  color: #2A94DE;
 }
 </style>
