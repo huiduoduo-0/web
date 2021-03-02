@@ -211,7 +211,7 @@ export default {
   color: #fff;
   font-family: "Source Sans Pro";
   background-size: 100%;
-  background-image: url("../assets/xx.png");
+  background-image: url("../assets/beijing.png");
   position: relative;
   #bgd {
     height: 100vh;

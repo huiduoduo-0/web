@@ -176,7 +176,7 @@ export default {
   color: #fff;
   font-family: "Source Sans Pro";
   background-size: 100%;
-  background-image: url("../assets/xx.png");
+  background-image: url("../assets/beijing.png");
   position: relative;
   #bgd {
     height: 100vh;
@@ -185,7 +185,7 @@ export default {
   }
   #loginBox {
     width: 300px;
-    height: 350px;
+    height: 35s0px;
     position: absolute;
     top: 0;
     left: 0;
@@ -220,6 +220,9 @@ export default {
     }
     .wjmm{
       margin-left: 35%;
+    }
+    .genhuan{
+       margin-left: 25%;   
     }
   }
 }
