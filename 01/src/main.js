@@ -13,7 +13,7 @@ axios.defaults.withCredentials = true
 axios.defaults.headers.common['Authorization'] = store.state.token
 Vue.prototype.$axios=axios
 axios.defaults.baseURL="http://localhost:8090"
-import store from './store/index'
+import store from './store'
 Vue.config.productionTip = false
 
 // 导入ElementUI
@@ -40,6 +40,7 @@ axios.interceptors.request.use(
 
 new Vue({
   router,
+  store,
   render: h => h(App)
 }).$mount('#app')
 

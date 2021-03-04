@@ -62,6 +62,10 @@ export default {
 }
 .interval {
   height: 1000px;
+   flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  align-content: space-between;
 }
 
 .el-carousel__item:nth-child(2n + 1) {
@@ -76,7 +80,7 @@ export default {
   width: 280px;
   height: 150px;
   text-align: center;
-  margin: 17px;
+  margin: 5px;
   background: -webkit-linear-gradient(left,#44DCE0 0%,#2C98DE 100%);
   position: relative;
   border-radius: 10px;

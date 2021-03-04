@@ -27,9 +27,7 @@
           
         >
           <el-row > 
-            <el-col :span='1'>
-              <span class="iconfont"></span>
-            </el-col>
+           
             <el-col :span='22'>
               <el-input
               prefix-icon="iconfont icon-yonghu"
@@ -49,9 +47,7 @@
           
         >
           <el-row >
-            <el-col :span='1'>
-              <span class="iconfont"></span>
-            </el-col>
+            
             <el-col :span='22'>
               <el-input
                 class="inps"
@@ -83,8 +79,8 @@
               ></el-input>
                <div class="message" v-if="falg"><span style="color:#dc2406">{{message}}</span></div>
             </el-col>
-            <el-col :span='6'>
-             <img :src="imgUrl"  alt=""  @click="resetImg" style="margin:7.2px 0px 0px 1px;">
+            <el-col :span='5'>
+             <img :src="imgUrl"  alt=""   @click="resetImg" style="margin:6.2px 0px 0px 2px;box-shadow: -1px 2px 3px rgb(38 10 17 / 54%);border-radius: 2px;">
           </el-col>
           
            </el-row>
@@ -118,7 +114,9 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex';
 export default {
+  
   data() {
         //用户名正则校验
       let nameRule1 = (rule, value, callback) => {
@@ -165,6 +163,7 @@ export default {
     };
   },
   methods: {
+     ...mapMutations(['changeLogin']),
     //提交登录
     submitForm(loginForm) {
       
@@ -195,7 +194,10 @@ export default {
             .then(function (response) {
               console.log(response);
               if (response.data.code == 200) {
-                window.location.href = "/index";
+                var userToken = response.data.date.token;
+                alert(userToken)
+                vueThis.changeLogin({ Authorization : userToken }); 
+                window.location.href = "/goods";
               }else{
               vueThis.imgUrl = "http://localhost:8090/code/img?time="+new Date();
                vueThis.falg = true;
@@ -332,11 +334,13 @@ export default {
   }
   /deep/.el-form-item {
     margin-bottom: 2px;
-}
-  .message{
-    margin-top: -14px;
-    margin-bottom: -16px;
   }
+  .message{
+    margin-top: -15px;
+    margin-bottom: -14px;
+    font-size: 5px;
+  }
+
   }
 }
 </style>

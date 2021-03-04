@@ -1,15 +1,8 @@
 <template>
   <div id="register">
-    <div id="bgd">
-      <canvas
-        id='myCanvas'
-        :width='width'
-        :height='height'
-      >
-      </canvas>
-    </div>
+   
     <div id="loginBox">
-      <h2 class="zhuce">注册</h2>
+      
       <el-form
         :model="loginForm"
         :rules="loginRules"
@@ -19,18 +12,17 @@
         <el-form-item
           label=""
           prop="userName"
-          style="margin-top:40px;"
+          style=""
         >
           <el-row>
-            <el-col :span='2'>
-              <span class="iconfont"></span>
-            </el-col>
+           
             <el-col :span='22'>
               <el-input
-                class="inps"
-                placeholder='用户名，6到12位英文或数字'
-                v-model="loginForm.userName"
-               
+               @blur="users('userName')"
+               class="inps"
+               placeholder='用户名，6到12位英文或数字'
+               v-model="loginForm.userName"
+               prefix-icon="iconfont icon-yonghu"
               ></el-input>
             </el-col>
           </el-row>
@@ -41,15 +33,15 @@
           prop="userPassword"
         >
           <el-row>
-            <el-col :span='2'>
-              <span class="iconfont"></span>
-            </el-col>
+            
             <el-col :span='22'>
               <el-input
+                 @blur="users('userPassword')"
                 class="inps"
                 placeholder='密码，8到20位英文或数字'
-                v-model="loginForm.userPassword"
-                 show-password
+                 v-model="loginForm.userPassword"
+                prefix-icon="iconfont icon-mima"
+                show-password
               ></el-input>
             </el-col>
           </el-row>
@@ -60,15 +52,15 @@
           prop="ConfirmPassword"
         >
           <el-row>
-            <el-col :span='2'>
-              <span class="iconfont"></span>
-            </el-col>
+            
             <el-col :span='22'>
               <el-input
+               @blur="usersConfirmPassword()"
                 class="inps"
                 placeholder='确认密码，和密码相同'
                 v-model="loginForm.ConfirmPassword"
-                 show-password
+                prefix-icon="iconfont icon-mima"
+                show-password
               ></el-input>
             </el-col>
           </el-row>
@@ -79,15 +71,14 @@
           prop="email"
         >
           <el-row>
-            <el-col :span='2'>
-              <span class="iconfont"></span>
-            </el-col>
+            
             <el-col :span='22'>
               <el-input
+               @blur="usersEmail()"
                 class="inps"
                 placeholder='邮箱,非必填'
                 v-model="loginForm.email"
-                
+                prefix-icon="iconfont icon-youxiang"
               ></el-input>
             </el-col>
           </el-row>
@@ -98,15 +89,14 @@
           prop="mobile"
         >
           <el-row>
-            <el-col :span='2'>
-              <span class="iconfont"></span>
-            </el-col>
+            
             <el-col :span='22'>
               <el-input
                 class="inps"
                 placeholder='手机号'
+                @blur="usersMobile('12')"
                 v-model="loginForm.mobile"
-                
+                prefix-icon="iconfont icon-shouji"
               ></el-input>
             </el-col>
           </el-row>
@@ -117,40 +107,32 @@
           prop="code"
         >
           <el-row>
-            <el-col :span='2'>
-              <span class="iconfont"></span>
-            </el-col>
-            <el-col :span='22'>
+            
+            <el-col :span='15'>
               <el-input
                 class="inps"
                 placeholder='验证码'
+                @blur="userCode('code')"
                 v-model="loginForm.code"
+                prefix-icon="iconfont icon-T"
               ></el-input>
+              <div class="message" v-if="flag"><span style="color:#dc2406">{{message}}</span></div>
             </el-col>
+            <el-col :span='6'>
+             <img :src="imgUrl"  alt=""  @click="resetImg" style="margin:10.2px 0px -5px 18px;box-shadow: -1px 2px 3px rgb(38 10 17 / 54%);border-radius: 2px;">
+          </el-col>
           </el-row>
         </el-form-item>
-
-        <el-form-item >
-          <el-row>
-             <img :src="imgUrl"  alt=""  @click="resetImg">
-             <a class="genhuan"  @click="resetImg"><el-button type="text" >看不清，点击更换</el-button></a>
-          </el-row>
-        </el-form-item>
-
-
-        <el-form-item style="margin-top:55px;">
+        <el-form-item style="margin-left:35px;">
           <el-button
             type="primary"
-            round
+            
             class="submitBtn"
             @click="submitForm('loginForm')"
           >注册</el-button>
         </el-form-item>
-        <el-form-item >
-          <el-row>
+
              <a @click="goLogin" class="goLogin"><el-button type="text">已有账号？立即登录</el-button></a>
-          </el-row>
-        </el-form-item>
       </el-form>
     </div>
   </div>
@@ -162,13 +144,13 @@ export default {
         // 设置手机号的验证规则及有效性查询
     const phoneRules = (rule, value, callback) => {
       if (!value) {
-        callback(new Error('请输入联系方式'))
+        callback(new Error('  '))
       } else {
         const reg = /^1[3|4|5|6|7|8][0-9]\d{8}$/
         if (reg.test(value)) {
 
-            var value = value; 
-           //去后台查询
+       var value = value; 
+      //去后台查询
       this.$axios
       .get("/user/repeatMobile", {params:{"mobile":value}})
       .then(function (response) {
@@ -176,7 +158,7 @@ export default {
         if (response.data.code == 200) {
          callback()
         }else{
-          callback(new Error('该手机号已经注册，请重新填写'))
+          callback(new Error('  '))
         }
         
       })
@@ -185,7 +167,7 @@ export default {
       });
 
         } else {
-          return callback(new Error('请输入正确的电话'))
+          return callback(new Error('  '))
         }
       }
     }
@@ -193,7 +175,7 @@ export default {
       const checkEmail = (rule, value, callback) => {
       const mailReg = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
       if (!value) {
-        callback()
+        callback(new Error("   "))
       }
       
         if (mailReg.test(value)) {
@@ -206,7 +188,7 @@ export default {
             if (response.data.code == 200) {
             callback()
             }else{
-              callback(new Error('该邮箱已经注册，请重新填写'))
+              callback(new Error(' '))
             }
             
           })
@@ -214,16 +196,16 @@ export default {
             console.log(error);
           });
         } else {
-          callback(new Error('请输入正确的邮箱格式'))
+          callback(new Error('  '))
         }
       
     }
     //确认密码验证
       var validatePass2 = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error('请再次输入密码'))
+      if (value === '') { 
+        callback(new Error('  '))
       } else if (value !== this.loginForm.userPassword) {
-        callback(new Error('两次输入密码不一致!'))
+        callback(new Error('   '))
       } else {
         callback()
       }
@@ -232,14 +214,14 @@ export default {
       let nameRule1 = (rule, value, callback) => {
           let regExp = /^[A-Za-z0-9]{5,12}$/;
           if(!value){
-               callback(new Error('请输入用户名'));
+               callback(new Error('  '));
           }else{
              if (regExp.test(value) === false) {
-               callback(new Error('请输入5到12尾的数字加英文组合'));
+               callback(new Error('  '));
               } else {
                  //用户名有效性校验（查重）
                 //去后台查询
-                const qs = require('qs')
+                
                var userName = value
                 this.$axios
               .get("/user/repeatUsername", {params:{userName:userName,id:0}
@@ -250,7 +232,7 @@ export default {
                 if (response.data.code == 200) {
                 callback()
                 }else{
-                  callback(new Error('该用户名已经注册，请重新填写'))
+                  callback(new Error('   '))
                 }
               })
               .catch(function (error) {
@@ -265,10 +247,10 @@ export default {
       let nameRule2 = (rule, value, callback) => {
           let regExp = /^[A-Za-z0-9]{6,20}$/;
           if (!value) {
-             callback(new Error('请输入密码'));
+             callback(new Error('  '));
           } else {
             if (regExp.test(value) === false) {
-              callback(new Error('请输入6到18尾的数字加英文组合'));
+              callback(new Error('   '));
             } else {
               callback()
           }
@@ -287,11 +269,13 @@ export default {
         mobile:""
       },
       imgUrl: "http://localhost:8090/code/img?time="+new Date(),
+      flag: false,
+      message: "",
       loginRules: {
         userName: [
           { required : true,validator:nameRule1 ,trigger: "blur" }],
         userPassword: [{ required: true, validator:nameRule2, trigger: "blur" } ],
-        code: [{ required: true, message: "请输入验证码", trigger: "blur" }],
+        code: [{ required: true, message: "  ", trigger: "blur" }],
         mobile:[{required: true,validator:phoneRules,trigger:'blur'}],
         email:[{validator:checkEmail,trigger:'blur'}],
         ConfirmPassword:[{required : true,validator:validatePass2,trigger: "blur" }]
@@ -299,6 +283,7 @@ export default {
     }
   },
   methods: {
+    
     //提交登录
     submitForm(loginForm) {
        var userName = this.loginForm.userName;
@@ -316,6 +301,22 @@ export default {
          email : email,
          ConfirmPassword : ConfirmPassword
        };
+       if(!userName && userName === ""){
+          this.flag = true;
+          this.message = "请输入用户名";
+        }else  if (!userPassword && userPassword === "") {
+              this.flag = true;
+              this.message = "请输入密码";
+        } else if(! this.loginForm.code &&  this.loginForm.code === ""){
+            this.flag = true;
+            this.message = "验证码不能为空";
+        } else if(!this.loginForm.email && this.loginForm.email === ""){
+            this.flag = true;
+            this.message = "邮箱不能为空";
+        }else if(!this.loginForm.mobile && this.loginForm.mobile === ""){
+            this.flag = true;
+            this.message = "请输入联系方式";
+         }
        let vueThis = this;
       this.$refs[loginForm].validate((valid) =>{
            if (valid) {
@@ -326,7 +327,9 @@ export default {
             if (response.data.code == 200) {
               window.location.href = "/";
             }else{
-               alert(response.data.message)
+              vueThis.flag = true;
+              vueThis.message = response.data.message;
+               
                vueThis.imgUrl = "http://localhost:8090/code/img?time="+new Date();
             }
           })
@@ -349,30 +352,153 @@ export default {
       goLogin(){
         window.location.href = "/";
       },
-
-    },
-
-  mounted() {
-    this.canvas = document.getElementById("myCanvas");
-    this.context = this.canvas.getContext("2d");
+      users(status){
+        var userName = this.loginForm.userName;
+        var userPassword = this.loginForm.userPassword;
+        var code = this.loginForm.code;
+        var ConfirmPassword = this.loginForm.ConfirmPassword;
+        var mobile = this.loginForm.mobile;
+        var email = this.loginForm.email;
+        var _this = this;
+      if(status === "userName"){
+        if(!userName && userName === ""){
+          this.flag = true;
+          this.message = "请输入用户名";
+        }else{
+          let regExp = /^[A-Za-z0-9]{5,12}$/;
+          if(regExp.test(userName) != true){
+          this.flag = true;
+          this.message = "请输入5到12尾的数字加英文组合";
+          }else{
+             //用户名有效性校验（查重）
+                //去后台查询
+               var userName = userName
+                this.$axios
+              .get("/user/repeatUsername", {params:{userName:userName,id:0}
+              })
+              .then(function (response) {
+                console.log(response);
+                if (response.data.code == 404) {
+                _this.flag = true;
+                _this.message = "该用户名已经注册，请重新填写";  
+                 
+                }
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
+          }
+        }
+      }
+        if(status === "userPassword"){
+          let regExp = /^[A-Za-z0-9]{6,20}$/;
+          if (!userPassword && userPassword === "") {
+              this.flag = true;
+              this.message = "请输入密码";
+          } else {
+            if (regExp.test(userPassword) === false) {
+              this.flag = true;
+              this.message = "请输入6到18尾的数字加英文组合";
+            } 
+        }
+        
+        
+      }
+     },
+     userCode(status){
+       if(status === "code"){
+          if(! this.loginForm.code &&  this.loginForm.code === ""){
+            this.flag = true;
+            this.message = "验证码不能为空";
+          }
+        }
+     },
+     usersEmail(){
+       var _this = this;
+        if(!this.loginForm.email && this.loginForm.email === ""){
+            this.flag = true;
+            this.message = "邮箱不能为空";
+          }else{
+            const mailReg = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+            if(mailReg.test(this.loginForm.email) === false){
+              this.flag = true;
+              this.message = "请输入正确的邮箱格式";
+            }else{
+              //去后台查询
+              var value = this.loginForm.email; 
+              this.$axios
+              .get("/user/repeatEmail", {params:{"email":value}})
+              .then(function (response) {
+                console.log(response);
+                if (response.data.code == 404) {
+                  _this.flag = true;
+                  _this.message = "该邮箱已经注册，请重新填写";
+                }
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
+            }
+        }
+     },
+      usersMobile(status){
+           
+          if(!this.loginForm.mobile && this.loginForm.mobile === ""){
+            this.flag = true;
+            this.message = "请输入联系方式";
+          }else{
+             const reg = /^1[3|4|5|6|7|8][0-9]\d{8}$/;
+             if(!reg.test(this.loginForm.mobile)){
+               this.flag = true;
+               this.message = "请输入正确的手机号码"
+             }else{
+                 var value = this.loginForm.mobile; 
+                 //去后台查询
+                 var _this = this;
+                 this.$axios
+                 .get("/user/repeatMobile", {params:{"mobile":value}})
+                 .then(function (response) {
+                 console.log(response.data);
+                 if (response.data.code == 404) {
+                   
+                     _this.flag = true;
+                     _this.message = "该手机号已经注册，请重新填写";
+                  }
+                 })
+                 .catch(function (error) {
+                    console.log(error);
+                 });
+             }
+          }
+         },
+         
+     usersConfirmPassword(){
+          if(!this.loginForm.ConfirmPassword && this.loginForm.ConfirmPassword === ""){
+            this.flag = true;
+            this.message= "请再次输入密码";
+          }else if(this.loginForm.ConfirmPassword != this.loginForm.userPassword){
+            this.flag = true;
+            this.message= "两次输入密码不一致!";
+          }
+        }
     }
+   
+
   
-};
+  
+}
 </script>
 
 <style lang='less' scoped>
+@import url("//at.alicdn.com/t/font_2388775_aj5zgfsigy.css");
 #register {
-  width: 100vw;
-  padding: 0;
-  margin: 0;
-  height: 100vh;
-  font-size: 16px;
   background-repeat: no-repeat;
   background-position: left top;
-  background-color: #242645;
-  color: #fff;
-  font-family: "Source Sans Pro";
+  background-color: #fffefe;
+  color: rgb(255, 255, 255,1.5);
+  font-family: "Microsoft YaHei";
   background-size: 100%;
+  height: 56%;
   background-image: url("../assets/register.png");
   position: relative;
   #bgd {
@@ -381,46 +507,82 @@ export default {
     overflow: hidden;
   }
   #loginBox {
-    width: 300px;
-    height: 640px;
+    width: 350px;
+    height: 370px;
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    margin: auto;
-    padding: 50px 40px 40px 40px;
-    box-shadow: -15px 15px 15px rgba(6, 17, 47, 0.7);
-    opacity: 1;
-    background: linear-gradient(
-      230deg,
-      rgba(53, 57, 74, 0) 0%,
-      rgb(0, 0, 0) 100%
-    );
-    /deep/ .inps input {
-      border: none;
-      color: #fff;
-      background-color: transparent;
-      font-size: 12px;
-    }
-    .submitBtn {
-      background-color: transparent;
-      color: #39f;
-      width: 200px;
-      margin-left: 15%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 23em;
+    padding: 30px 10px 10px 2px;
+    box-shadow:7px -3px 40px rgb(16 16 16 / 16%);
+    background: rgba(255, 255, 255, 0.425);
+    border-radius: 4px;
+    .submitBtn { 
+      width: 283px;
+      opacity: 1;
+      border-radius: 5px;
     }
     .iconfont {
       color: #fff;
     }
-    .zhuce {
-      margin-left: 40%;   
-    }
     .goLogin{
-       margin-left: 25%;
+      margin-left: 26em;
+      font-size:0.5em;
     }
     .genhuan{
        margin-left: 25%;   
     }
-  }
+    /deep/ .el-input__inner{
+    font-size: 2px;
+    height: 30px;
+    margin-left: 38px;    
+    box-shadow: 0px -1px 0px rgb(16 16 16 / 8%);
+    } 
+   /deep/ .el-input__icon {
+    padding-right: 14px;
+    padding-left: 55px;
+    color:#1b1919bd;
+    }
+   /deep/.el-input--prefix .el-input__inner {
+    padding-left: 56px;
+    font-size: 2px;
+    width: 92%;   
+    }
+   /deep/.el-form-item {
+    margin-bottom: 2px;
+    }
+   .message{
+    margin-top: -21px;
+    margin-bottom: -24px;
+    font-size: 5px;
+    margin-inline-start: 36px;
+    }
+   /deep/ .el-form-item__content {
+    line-height: 44px;
+    position: relative;
+    font-size: 14px;
+   }
+   /deep/ .el-input {
+    position: relative;
+    font-size: 15px;
+    display: inline-block;
+    width: 95%;
+   }
+   /deep/ .el-button {
+    padding: 9px 20px;
+   }
+  
+   /deep/.el-button--text {
+    color: #409EFF;
+    font-size: 6px;
+    background: 0 0;
+    padding-left: 0;
+    padding-right: 0;
+   }
+ }
 }
 </style>
