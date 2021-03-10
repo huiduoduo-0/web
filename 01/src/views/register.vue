@@ -307,16 +307,16 @@ export default {
         }else  if (!userPassword && userPassword === "") {
               this.flag = true;
               this.message = "请输入密码";
-        } else if(! this.loginForm.code &&  this.loginForm.code === ""){
-            this.flag = true;
-            this.message = "验证码不能为空";
         } else if(!this.loginForm.email && this.loginForm.email === ""){
             this.flag = true;
             this.message = "邮箱不能为空";
         }else if(!this.loginForm.mobile && this.loginForm.mobile === ""){
             this.flag = true;
             this.message = "请输入联系方式";
-         }
+         }else if(! this.loginForm.code &&  this.loginForm.code === ""){
+            this.flag = true;
+            this.message = "验证码不能为空";
+        }
        let vueThis = this;
       this.$refs[loginForm].validate((valid) =>{
            if (valid) {
@@ -402,7 +402,6 @@ export default {
             } 
         }
         
-        
       }
      },
      userCode(status){
@@ -442,7 +441,6 @@ export default {
         }
      },
       usersMobile(status){
-           
           if(!this.loginForm.mobile && this.loginForm.mobile === ""){
             this.flag = true;
             this.message = "请输入联系方式";
@@ -450,7 +448,7 @@ export default {
              const reg = /^1[3|4|5|6|7|8][0-9]\d{8}$/;
              if(!reg.test(this.loginForm.mobile)){
                this.flag = true;
-               this.message = "请输入正确的手机号码"
+               this.message = "请输入联系正确的方式"
              }else{
                  var value = this.loginForm.mobile; 
                  //去后台查询
@@ -573,6 +571,7 @@ export default {
     width: 95%;
    }
    /deep/ .el-button {
+    border-radius: 8px;
     padding: 9px 20px;
    }
   

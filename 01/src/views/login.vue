@@ -77,7 +77,7 @@
                 prefix-icon="iconfont icon-T"
                 @blur="users('code')"
               ></el-input>
-               <div class="message" v-if="falg"><span style="color:#dc2406">{{message}}</span></div>
+               <div class="message" v-if="flag"><span style="color:#dc2406">{{message}}</span></div>
             </el-col>
             <el-col :span='5'>
              <img :src="imgUrl"  alt=""   @click="resetImg" style="margin:6.2px 0px 0px 2px;box-shadow: -1px 2px 3px rgb(38 10 17 / 54%);border-radius: 2px;">
@@ -153,7 +153,7 @@ export default {
         code:""
       },
        imgUrl: "http://localhost:8090/code/img?time="+new Date(),
-       falg : false,
+       flag : false,
        message : "",
       loginRules: {
         userName: [{ required: true, validator:nameRule1, trigger: "blur" }],
@@ -176,14 +176,14 @@ export default {
          code: code
        };
        if(!userName && userName === ""){
-               this.falg = true;
+               this.flag = true;
                this.message = "账号不能为空";
                
        }else if(!userPassword && userPassword === ""){
-               this.falg = true;
+               this.flag = true;
                this.message = "密码不能为空";
        }else if(!code && code === ""){
-               this.falg = true;
+               this.flag = true;
                this.message = "验证码不能为空";
        }
        let vueThis = this;
@@ -195,14 +195,12 @@ export default {
               console.log(response);
               if (response.data.code == 200) {
                 var userToken = response.data.date.token;
-                alert(userToken)
                 vueThis.changeLogin({ Authorization : userToken }); 
                 window.location.href = "/goods";
               }else{
               vueThis.imgUrl = "http://localhost:8090/code/img?time="+new Date();
                vueThis.falg = true;
                vueThis.message = response.data.message;
-              
               }
             })
             .catch(function (error) {
@@ -216,15 +214,13 @@ export default {
       users(status){
         if(status === "userName"){
           if(!this.loginForm.userName && this.loginForm.userName == ""){
-               this.falg = true;
+               this.flag = true;
                this.message = "账号不能为空";
           }else{
              let regExp = /^[A-Za-z0-9]{5,12}$/;
             if(regExp.test(this.loginForm.userName) === false){
-               this.falg = true;
+               this.flag = true;
                this.message = "请输入5到12尾的数字加英文组合";
-            }else{
-               this.falg = false; 
             }
           }
         }
@@ -235,19 +231,15 @@ export default {
           }else{
              let regExp = /^[A-Za-z0-9]{6,20}$/;
              if(regExp.test(this.loginForm.userPassword) === false){
-               this.falg = true;
+               this.flag = true;
                this.message = "请输入6到18尾的数字加英文组合";
-             }else{
-               this.falg = false;
              }
           }
         }
         if(status === "code"){
           if(!this.loginForm.code && this.loginForm.code == ""){
-            this.falg = true;
+            this.flag = true;
             this.message = "验证码不能为空";
-          }else{
-            this.falg = false;
           }
         }
       },

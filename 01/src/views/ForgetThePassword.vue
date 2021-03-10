@@ -9,7 +9,6 @@
       </canvas>
     </div>
     <div id="loginBox">
-      <h2 class="wjmm">修改密码</h2>
       <el-form
         :model="loginForm"
         :rules="loginRules"
@@ -19,18 +18,17 @@
         <el-form-item
           label=""
           prop="userPassword"
-          style="margin-top:40px;"
+          
         >
           <el-row>
-            <el-col :span='2'>
-              <span class="iconfont"></span>
-            </el-col>
+            
             <el-col :span='22'>
               <el-input
                 class="inps"
                 placeholder='新密码'
                 v-model="loginForm.userPassword"
                 show-password
+                prefix-icon="iconfont icon-mima"
               ></el-input>
             </el-col>
           </el-row>
@@ -40,20 +38,19 @@
           prop="ConfirmPassword"
         >
           <el-row>
-            <el-col :span='2'>
-              <span class="iconfont"></span>
-            </el-col>
+           
             <el-col :span='22'>
               <el-input
                 class="inps"
                 placeholder='确认密码'
                 v-model="loginForm.ConfirmPassword"
                 show-password
+                prefix-icon="iconfont icon-mima"
               ></el-input>
             </el-col>
           </el-row>
         </el-form-item>
-        <el-form-item style="margin-top:55px;">
+        <el-form-item >
           <el-button
             type="primary"
             round
@@ -61,12 +58,13 @@
             @click="submitForm('loginForm')"
           >确定</el-button>
         </el-form-item>
-        <el-form-item >
-          <el-row>
+
+        
+         
              <a @click="login" class="logins">
                <el-button type="text">已找到密码，立即登录</el-button></a>
-          </el-row>
-        </el-form-item>
+         
+        
        
       </el-form>
     </div>
@@ -164,18 +162,15 @@ export default {
 </script>
 
 <style lang='less' scoped>
+@import url("//at.alicdn.com/t/font_2388775_aj5zgfsigy.css");
 #ForgetThePassword {
-  width: 100vw;
-  padding: 0;
-  margin: 0;
-  height: 100vh;
-  font-size: 16px;
   background-repeat: no-repeat;
   background-position: left top;
-  background-color: #242645;
-  color: #fff;
-  font-family: "Source Sans Pro";
+  background-color: #fffefe;
+  color: rgb(255, 255, 255,1.5);
+  font-family: "Microsoft YaHei";
   background-size: 100%;
+  height: 56%;
   background-image: url("../assets/beijing.png");
   position: relative;
   #bgd {
@@ -184,46 +179,86 @@ export default {
     overflow: hidden;
   }
   #loginBox {
-    width: 300px;
-    height: 35s0px;
+    width: 340px;
+    height: 173px;
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    margin: auto;
-    padding: 50px 40px 40px 40px;
-    box-shadow: -15px 15px 15px rgba(6, 17, 47, 0.7);
-    opacity: 1;
-    background: linear-gradient(
-      230deg,
-      rgba(53, 57, 74, 0) 0%,
-      rgb(0, 0, 0) 100%
-    );
-    /deep/ .inps input {
-      border: none;
-      color: #fff;
-      background-color: transparent;
-      font-size: 12px;
-    }
-    .submitBtn {
-      background-color: transparent;
-      color: #39f;
-      width: 200px;
-      margin-left: 15%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 24.5em;
+    padding: 30px 10px 10px 2px;
+    box-shadow:7px -3px 40px rgb(16 16 16 / 16%);
+    background: rgba(255, 255, 255, 0.425);
+    border-radius: 4px;
+    .submitBtn { 
+      width: 274px;
+      opacity: 1;
+      border-radius: 4px;
+      margin-left: 31px;
     }
     .iconfont {
       color: #fff;
     }
     .logins{
-        margin-left: 25%;
-    }
-    .wjmm{
-      margin-left: 35%;
+      margin-left: 20.5em;
+      font-size:xx-small;
+      
     }
     .genhuan{
        margin-left: 25%;   
     }
-  }
+    /deep/ .el-input__inner{
+    font-size: xx-small;
+    height: 30px;
+    margin-left: 33px;    
+    box-shadow: 0px -1px 0px rgb(16 16 16 / 8%);
+    } 
+   /deep/ .el-input__icon {
+    padding-right: 14px;
+    padding-left: 42px;
+    color:#1b1919bd;
+    }
+   /deep/.el-input--prefix .el-input__inner {
+    padding-left: 44px;
+    font-size: xx-small;
+    width: 92%;   
+    }
+   /deep/.el-form-item {
+    margin-bottom: 2px;
+    }
+   .message{
+    margin-top: -21px;
+    margin-bottom: -24px;
+    font-size: xx-small;
+    margin-inline-start: 36px;
+    }
+   /deep/ .el-form-item__content {
+    line-height: 44px;
+    position: relative;
+    font-size: xx-small;
+   }
+   /deep/ .el-input {
+    position: relative;
+    font-size: xx-small;
+    display: inline-block;
+    width: 95%;
+   }
+   /deep/ .el-button {
+    border-radius: 4px;
+    padding: 9px 20px;
+   }
+  
+   /deep/.el-button--text {
+    color: #409EFF;
+    font-size: xx-small;
+    background: 0 0;
+    padding-left: 0;
+    padding-right: 0;
+   }
+ }
 }
+
 </style>
