@@ -190,7 +190,7 @@ export default {
               if (response.data.code == 200) {
                 var userToken = response.data.date.token;
                 vueThis.changeLogin({ Authorization : userToken }); 
-                window.location.href = "/goods";
+                window.location.href = "/collection";
               }else{
               vueThis.imgUrl = "http://localhost:8090/code/img?time="+new Date();
                vueThis.flag = true;
