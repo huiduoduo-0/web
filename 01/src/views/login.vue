@@ -2,17 +2,11 @@
   <div id="login">
 
 
-    <div id="bgd">
-      <canvas
-        id='myCanvas'
-        :width='width'
-        :height='height'
-      >
-      </canvas>
+
       
      
    
-    <div id="loginBox">
+    <div id="loginBox" style="box-shadow:7px -3px 40px rgb(16 16 16 / 16%);">
      
       <el-form
         :model="loginForm"
@@ -108,7 +102,7 @@
         </el-form-item>
         
       </el-form>
-      </div>
+      
     </div>
   </div>
 </template>
@@ -226,7 +220,7 @@ export default {
         }
         if(status === "userPassword"){
           if(!this.loginForm.userPassword && this.loginForm.userPassword == ""){
-            this.falg = true;
+            this.flag = true;
             this.message = "密码不能为空";
           }else{
              let regExp = /^[A-Za-z0-9]{6,20}$/;
@@ -269,7 +263,7 @@ export default {
   color: rgb(255, 255, 255,1.5);
   font-family: "Microsoft YaHei";
   background-size: 100%;
-  height: 56%;
+  height: 100%;
   background-image: url("../assets/login.png");
   position: relative;
   #bgd {
@@ -287,9 +281,9 @@ export default {
     bottom: 0;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 25em;
+    margin-top: 23%;
     padding: 30px 10px 10px 10px;
-    box-shadow:7px -3px 40px rgb(16 16 16 / 16%);
+    
     background: rgba(255, 255, 255, 0.425);
     border-radius: 4px;
     .submitBtn { 

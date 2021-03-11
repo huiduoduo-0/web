@@ -1,14 +1,7 @@
 <template>
   <div id="verification">
-    <div id="bgd">
-      <canvas
-        id='myCanvas'
-        :width='width'
-        :height='height'
-      >
-      </canvas>
-    </div>
-    <div id="loginBox">
+    <h1 class="yanzheng" style="padding-inline-start: 48%;padding-block-start: 19%;">验&#12288;&#12288;&#12288;证</h1>
+    <div id="loginBox" style="box-shadow:7px -3px 40px rgb(16 16 16 / 16%);">
       <el-form
         :model="loginForm"
         :rules="loginRules"
@@ -190,7 +183,7 @@ export default {
         this.imgUrl = "http://localhost:8090/code/img?time="+new Date();
       },
       login(){
-        window.location.href = "/";
+        window.location.href = "/login";
       },
       users(status){
         
@@ -242,7 +235,7 @@ export default {
   color: rgb(255, 255, 255,1.5);
   font-family: "Microsoft YaHei";
   background-size: 100%;
-  height: 56%;
+  height: 100%;
   background-image: url("../assets/beijing.png");
   position: relative;
   #bgd {
@@ -260,7 +253,7 @@ export default {
     bottom: 0;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 25em;
+    margin-top: 22.7%;
     padding: 30px 10px 10px 10px;
     box-shadow:7px -3px 40px rgb(16 16 16 / 16%);
     background: rgba(255, 255, 255, 0.425);
@@ -273,7 +266,9 @@ export default {
     .iconfont {
       color: #fff;
     }
-
+    .yanzheng{
+    margin-top: 10%;
+  }
     .goLogin{
       margin-left: 212px;
     }
@@ -300,7 +295,7 @@ export default {
     margin-left: 13px;
     font-size: 6px;
   }
-
+  
   }
 }
 </style>

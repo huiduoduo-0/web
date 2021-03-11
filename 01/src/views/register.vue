@@ -1,7 +1,7 @@
 <template>
   <div id="register">
    
-    <div id="loginBox">
+    <div id="loginBox" style="box-shadow: 0px 2px 3px rgb(38 10 17 / 9%);">
       
       <el-form
         :model="loginForm"
@@ -307,6 +307,9 @@ export default {
         }else  if (!userPassword && userPassword === "") {
               this.flag = true;
               this.message = "请输入密码";
+        }else if(!ConfirmPassword && ConfirmPassword ===""){
+          this.flag = true;
+              this.message = "请再次输入密码";
         } else if(!this.loginForm.email && this.loginForm.email === ""){
             this.flag = true;
             this.message = "邮箱不能为空";
@@ -350,7 +353,7 @@ export default {
       },
       //去登录
       goLogin(){
-        window.location.href = "/";
+        window.location.href = "/login";
       },
       users(status){
         var userName = this.loginForm.userName;
@@ -496,7 +499,7 @@ export default {
   color: rgb(255, 255, 255,1.5);
   font-family: "Microsoft YaHei";
   background-size: 100%;
-  height: 56%;
+  height: 100%;
   background-image: url("../assets/register.png");
   position: relative;
   #bgd {
@@ -514,10 +517,10 @@ export default {
     bottom: 0;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 23em;
+    margin-top: 21.5%;
     padding: 30px 10px 10px 2px;
-    box-shadow:7px -3px 40px rgb(16 16 16 / 16%);
-    background: rgba(255, 255, 255, 0.425);
+    
+    background: rgba(255, 255, 255, 0.329);
     border-radius: 4px;
     .submitBtn { 
       width: 283px;

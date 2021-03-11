@@ -12,7 +12,7 @@ const router = new VueRouter({
   //登录
   routes: [
     {
-      path: '/',
+      path: '/login',
       name: 'login',
       component: () => import('../views/login.vue'),
      
@@ -111,13 +111,13 @@ const router = new VueRouter({
 // 导航守卫
 // 使用 router.beforeEach 注册一个全局前置守卫，判断用户是否登陆
 router.beforeEach((to, from, next) => {
-  if (to.path === '/') {
+  if (to.path === '/login') {
     next();
   } else {
     let token = localStorage.getItem('Authorization');
- 
-    if (token === 'null' || token === '') {
-      next('/');
+    if (token === null || token === '') {
+      alert('您登录的用户已过期或请重新登录')
+      next('/login');
     } else {
       next();
     }

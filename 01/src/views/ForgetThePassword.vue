@@ -1,14 +1,7 @@
  <template>
   <div id="ForgetThePassword">
-    <div id="bgd">
-      <canvas
-        id='myCanvas'
-        :width='width'
-        :height='height'
-      >
-      </canvas>
-    </div>
-    <div id="loginBox">
+    <h1 class="yanzheng" style="padding-inline-start: 46.5%;padding-block-start: 18.5%;">修改密码</h1>
+    <div id="loginBox" style=" box-shadow:7px -3px 40px rgb(16 16 16 / 16%);">
       <el-form
         :model="loginForm"
         :rules="loginRules"
@@ -24,6 +17,7 @@
             
             <el-col :span='22'>
               <el-input
+              @blur="users('userPassword')"
                 class="inps"
                 placeholder='新密码'
                 v-model="loginForm.userPassword"
@@ -41,12 +35,14 @@
            
             <el-col :span='22'>
               <el-input
+              @blur="users('ConfirmPassword')"
                 class="inps"
                 placeholder='确认密码'
                 v-model="loginForm.ConfirmPassword"
                 show-password
                 prefix-icon="iconfont icon-mima"
               ></el-input>
+              <div class="message" v-if="flag"><span style="color:#dc2406">{{message}}</span></div>
             </el-col>
           </el-row>
         </el-form-item>
@@ -78,10 +74,10 @@ export default {
       let nameRule2 = (rule, value, callback) => {
           let regExp = /^[A-Za-z0-9]{6,20}$/;
           if (!value) {
-             callback(new Error('请输入密码'));
+             callback(new Error(' '));
           } else {
             if (regExp.test(value) === false) {
-              callback(new Error('请输入6到18尾的数字加英文组合'));
+              callback(new Error(' '));
             } else {
               callback()
           }
@@ -91,21 +87,20 @@ export default {
       //确认密码验证
       var validatePass2 = (rule, value, callback) => {
       if (value === '') {
-        callback(new Error('请再次输入密码'))
+        callback(new Error(' '))
       } else if (value !== this.loginForm.userPassword) {
-        callback(new Error('两次输入密码不一致!'))
+        callback(new Error('  '))
       } else {
         callback()
       }
        }
     return {
-      width: window.innerWidth,
-      height: window.innerHeight,
       loginForm: {
         userPassword: "",
         ConfirmPassword: ""
       },
-      
+      flag : false,
+      message : "",
       loginRules: {
         userPassword: [{ required: true, validator:nameRule2, trigger: "blur" } ],
         ConfirmPassword:[{required : true,validator:validatePass2,trigger: "blur" }]
@@ -116,15 +111,23 @@ export default {
   methods: {
     //提交登录
     submitForm(loginForm) {
+     
        var userPassword = this.loginForm.userPassword;
        var ConfirmPassword = this.loginForm.ConfirmPassword
-        var id = this.$route.query.id;
+        var id = this.$route.query.id;                                                                             
         console.log(id)
        let user = {
          userPassword: userPassword,
          ConfirmPassword: ConfirmPassword,
          id: id
        };
+        if (!userPassword && userPassword === "") {
+              this.flag = true;
+              this.message = "请输入密码";
+        }else if(!ConfirmPassword && ConfirmPassword ===""){
+          this.flag = true;
+              this.message = "请再次输入密码";
+        }
        let vueThis = this
          this.$refs[loginForm].validate((valid) =>{
            if (valid) {
@@ -133,7 +136,6 @@ export default {
             .then(function (response) {
               console.log(response.data);
               if (response.data.code == 200) {
-
                 window.location.href = "/"
               }else{
               alert(response.data.message) 
@@ -152,12 +154,33 @@ export default {
         this.imgUrl = "http://localhost:8090/code/img?time="+new Date();
       },
       login(){
-        window.location.href = "/";
+        window.location.href = "/login";
+      },
+      users(status){
+        if(status === "userPassword"){
+          if(!this.loginForm.userPassword && this.loginForm.userPassword == ""){
+            this.flag = true;
+            this.message = "密码不能为空";
+          }else{
+             let regExp = /^[A-Za-z0-9]{6,20}$/;
+             if(regExp.test(this.loginForm.userPassword) === false){
+               this.flag = true;
+               this.message = "请输入6到18尾的数字加英文组合";
+             }
+          }
+        }
+        if(status === "ConfirmPassword"){
+          if(!this.loginForm.ConfirmPassword && this.loginForm.ConfirmPassword === ""){
+            this.flag = true;
+            this.message= "请再次输入密码";
+          }else if(this.loginForm.ConfirmPassword != this.loginForm.userPassword){
+            this.flag = true;
+            this.message= "两次输入密码不一致!";
+          }
+        }
       }
     },
-  mounted() {
- 
-  }
+
 };
 </script>
 
@@ -170,7 +193,7 @@ export default {
   color: rgb(255, 255, 255,1.5);
   font-family: "Microsoft YaHei";
   background-size: 100%;
-  height: 56%;
+  height: 100%;
   background-image: url("../assets/beijing.png");
   position: relative;
   #bgd {
@@ -188,9 +211,9 @@ export default {
     bottom: 0;
     margin-left: auto;
     margin-right: auto;
-    margin-top: 24.5em;
+    margin-top: 22.5%;
     padding: 30px 10px 10px 2px;
-    box-shadow:7px -3px 40px rgb(16 16 16 / 16%);
+   
     background: rgba(255, 255, 255, 0.425);
     border-radius: 4px;
     .submitBtn { 
@@ -231,9 +254,9 @@ export default {
     }
    .message{
     margin-top: -21px;
-    margin-bottom: -24px;
+    margin-bottom: -21px;
     font-size: xx-small;
-    margin-inline-start: 36px;
+    margin-inline-start: 32px;
     }
    /deep/ .el-form-item__content {
     line-height: 44px;
