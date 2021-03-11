@@ -193,7 +193,7 @@ export default {
                 window.location.href = "/goods";
               }else{
               vueThis.imgUrl = "http://localhost:8090/code/img?time="+new Date();
-               vueThis.falg = true;
+               vueThis.flag = true;
                vueThis.message = response.data.message;
               }
             })

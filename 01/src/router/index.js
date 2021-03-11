@@ -109,7 +109,7 @@ router.beforeEach((to, from, next) => {
   } else {
     let token = localStorage.getItem('Authorization');
     if (token === null || token === '') {
-      alert('您登录的用户已过期或请重新登录')
+      alert('您登录的用户已过期或未登录，请重新登录')
       next('/login');
     } else {
       next();
